@@ -11,11 +11,12 @@ public class Tableau extends JFrame{
     private JButton frein;
     private JLabel aff_V;
     private Voiture voiture;
-
+    private Ecoute ecoute;
 
         public Tableau(){
             voiture = new Voiture(180, 0);
-            Ecoute ecoute=new Ecoute(this);
+            ecoute=new Ecoute(this);
+
             setTitle("Tableau de bord");
             setSize(800,600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,16 +25,18 @@ public class Tableau extends JFrame{
 
             acceleration=new JButton("Accelerer");
             acceleration.addActionListener(ecoute);
+            acceleration.addMouseListener(ecoute);
 
             frein=new JButton("Freiner");
             frein.addActionListener(ecoute);
+            frein.addMouseListener(ecoute);
 
-            buttonPanel.add(acceleration);
             buttonPanel.add(frein);
+            buttonPanel.add(acceleration);
 
             aff_V = new JLabel("0 km/h", SwingConstants.CENTER);
-
             updateVitesse();
+
             add(aff_V,BorderLayout.NORTH);
             add(buttonPanel, BorderLayout.SOUTH);
             
