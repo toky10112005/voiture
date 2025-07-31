@@ -43,9 +43,13 @@ public class Tableau extends JFrame{
             
             setVisible(true);
         }
+
         public JButton getAcceleratorButton() {
-    return this.acceleration;
-}
+            return this.acceleration;
+        }
+        public JButton getFreinage(){
+            return this.frein;
+        }
 
         public Voiture getVoiture(){
             return this.voiture;

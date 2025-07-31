@@ -26,6 +26,8 @@ public class Ecoute implements MouseListener{
             lastTime = now;
             
             voiture.updatePhysique(deltaTime);
+            voiture.freignage(deltaTime);
+            
             t.updateVitesse();
         });
         physicsTimer.start();
@@ -36,12 +38,16 @@ public class Ecoute implements MouseListener{
     public void mousePressed(MouseEvent e){
          if (e.getSource() == t.getAcceleratorButton()) {
             voiture.setAccelerateurAppuye(true);
+        }else if(e.getSource() == t.getFreinage()){
+            voiture.setFreinAppuye(true);
         }
     }
       @Override
     public void mouseReleased(MouseEvent e) {
          if (e.getSource() == t.getAcceleratorButton()) {
             voiture.setAccelerateurAppuye(false);
+        }else if(e.getSource() == t.getFreinage()){
+            voiture.setFreinAppuye(false);
         }
     }
 

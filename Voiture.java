@@ -4,11 +4,14 @@ public class Voiture{
     private int V_Max;
     private double V_actuel;
 
-    private final double coef_frot=0.5;  // N/(m/s)
+     double forceMoteur = 20000; 
+    private final double coef_frot=1;  // N/(m/s)
     private final double masse=1500;
-    private final double frein_moteur=-1000;
+    private final double frein_moteur=-3000;
+    private final double f_freignage=-10000;
 
     private boolean accelerateurAppuye = false;
+     private boolean freinAppuye = false;
 
     public Voiture(int V_Max,int V_actuel){
         this.V_Max=V_Max;
@@ -31,10 +34,13 @@ public class Voiture{
     public void setAccelerateurAppuye(boolean appuye) {
         this.accelerateurAppuye = appuye;
     }
+    public void setFreinAppuye(boolean appuye){
+        this.freinAppuye = appuye;
+    }
 
         public void updatePhysique(double deltaTime) {
         if (accelerateurAppuye) {
-            double forceMoteur = 10000; 
+           
             double acceleration = forceMoteur / masse;
             V_actuel = Math.min(V_actuel + acceleration * deltaTime, V_Max);
         } else {
@@ -43,4 +49,12 @@ public class Voiture{
             V_actuel = Math.max(0, V_actuel + acceleration * deltaTime);
         }
     }
+
+        public void freignage(double deltaTime){
+            if(freinAppuye){
+                double forceFrottement = coef_frot * V_actuel;
+                double acceleration = ((frein_moteur + forceFrottement)+f_freignage) / masse;
+                V_actuel = Math.max(0, V_actuel + acceleration * deltaTime);
+            }   
+        }
 }
