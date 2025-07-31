@@ -21,6 +21,7 @@ public class Voiture{
     public int getV_Max(){
         return this.V_Max;
     }
+    
     public void setV_Max(int V){
         this.V_Max=V;
     }

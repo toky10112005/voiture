@@ -9,6 +9,8 @@ public class Tableau extends JFrame{
 
     private JButton acceleration;
     private JButton frein;
+    private JButton boite_plus;
+    private JButton boite_moins;
     private JLabel aff_V;
     private Voiture voiture;
     private Ecoute ecoute;
@@ -24,16 +26,26 @@ public class Tableau extends JFrame{
 
             JPanel buttonPanel = new JPanel(new FlowLayout());
 
-            acceleration=new JButton("Accelerer");
-            
+            JPanel pedale= new JPanel(new FlowLayout());
+            JPanel levier= new JPanel(new FlowLayout());
+
+            acceleration=new JButton("Accelerer");    
             acceleration.addMouseListener(ecoute);
 
             frein=new JButton("Freiner");
-           
             frein.addMouseListener(ecoute);
 
-            buttonPanel.add(frein);
-            buttonPanel.add(acceleration);
+            boite_plus=new JButton("+");
+            boite_moins=new JButton("-");
+
+            pedale.add(frein);
+            pedale.add(acceleration);
+
+            levier.add(boite_plus);
+            levier.add(boite_moins);
+
+            buttonPanel.add(levier,BorderLayout.NORTH);
+            buttonPanel.add(pedale,BorderLayout.SOUTH);
 
             aff_V = new JLabel("0 km/h", SwingConstants.CENTER);
             updateVitesse();

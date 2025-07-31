@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import fiara.*;
 
-public class Ecoute implements MouseListener{
+public class Ecoute implements ActionListener,MouseListener{
 
     private Tableau t;
     private Voiture voiture;
@@ -27,7 +27,7 @@ public class Ecoute implements MouseListener{
             
             voiture.updatePhysique(deltaTime);
             voiture.freignage(deltaTime);
-            
+
             t.updateVitesse();
         });
         physicsTimer.start();
@@ -55,5 +55,9 @@ public class Ecoute implements MouseListener{
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
 
+    @Override
+    public void actionPerformed(ActionEvent e){
+        
+    }
 
 }
