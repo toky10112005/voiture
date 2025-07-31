@@ -15,6 +15,7 @@ public class Tableau extends JFrame{
 
         public Tableau(){
             voiture = new Voiture(180, 0);
+
             ecoute=new Ecoute(this);
 
             setTitle("Tableau de bord");
@@ -24,11 +25,11 @@ public class Tableau extends JFrame{
             JPanel buttonPanel = new JPanel(new FlowLayout());
 
             acceleration=new JButton("Accelerer");
-            acceleration.addActionListener(ecoute);
+            
             acceleration.addMouseListener(ecoute);
 
             frein=new JButton("Freiner");
-            frein.addActionListener(ecoute);
+           
             frein.addMouseListener(ecoute);
 
             buttonPanel.add(frein);
@@ -42,6 +43,9 @@ public class Tableau extends JFrame{
             
             setVisible(true);
         }
+        public JButton getAcceleratorButton() {
+    return this.acceleration;
+}
 
         public Voiture getVoiture(){
             return this.voiture;
