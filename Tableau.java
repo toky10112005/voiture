@@ -14,9 +14,13 @@ public class Tableau extends JFrame{
     private JLabel aff_V;
     private Voiture voiture;
     private Ecoute ecoute;
+    private Boite boite;
+     private JLabel aff_Rap;
 
         public Tableau(){
-            voiture = new Voiture(180, 0);
+            boite=new Boite();
+            voiture = new Voiture(180, 0,boite);
+
 
             ecoute=new Ecoute(this);
 
@@ -36,24 +40,36 @@ public class Tableau extends JFrame{
             frein.addMouseListener(ecoute);
 
             boite_plus=new JButton("+");
+            boite_plus.addActionListener(ecoute);
+
             boite_moins=new JButton("-");
+            boite_moins.addActionListener(ecoute);
+
+            aff_V = new JLabel("0 km/h", SwingConstants.CENTER);
+            aff_Rap = new JLabel("0", SwingConstants.CENTER);
 
             pedale.add(frein);
             pedale.add(acceleration);
 
-            levier.add(boite_plus);
             levier.add(boite_moins);
+            levier.add(aff_Rap);
+            levier.add(boite_plus);
+            update_Rapport();
 
             buttonPanel.add(levier,BorderLayout.NORTH);
             buttonPanel.add(pedale,BorderLayout.SOUTH);
 
-            aff_V = new JLabel("0 km/h", SwingConstants.CENTER);
-            updateVitesse();
 
             add(aff_V,BorderLayout.NORTH);
             add(buttonPanel, BorderLayout.SOUTH);
             
+             updateVitesse();
+             update_Rapport();
             setVisible(true);
+        }
+
+        public Boite getBoite(){
+            return this.boite;
         }
 
         public JButton getAcceleratorButton() {
@@ -77,5 +93,9 @@ public class Tableau extends JFrame{
         } else {
             aff_V.setForeground(Color.GREEN);
         }
+    }
+
+    public void update_Rapport(){
+        aff_Rap.setText(String.format("%d", boite.getRapport()));
     }
 }

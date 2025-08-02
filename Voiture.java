@@ -3,8 +3,9 @@ package fiara;
 public class Voiture{
     private int V_Max;
     private double V_actuel;
+    private Boite boite;
 
-     double forceMoteur = 20000; 
+     double forceMoteur = 10000; 
     private final double coef_frot=1;  // N/(m/s)
     private final double masse=1500;
     private final double frein_moteur=-3000;
@@ -13,9 +14,10 @@ public class Voiture{
     private boolean accelerateurAppuye = false;
      private boolean freinAppuye = false;
 
-    public Voiture(int V_Max,int V_actuel){
+    public Voiture(int V_Max,int V_actuel,Boite boite){
         this.V_Max=V_Max;
         this.V_actuel=V_actuel;
+        this.boite=boite;
     }
 
     public int getV_Max(){
@@ -40,9 +42,11 @@ public class Voiture{
     }
 
         public void updatePhysique(double deltaTime) {
+        double rapportMultiplier =  (boite.getRapport() * 0.5);
+        double forceEff = forceMoteur * rapportMultiplier;
+
         if (accelerateurAppuye) {
-           
-            double acceleration = forceMoteur / masse;
+            double acceleration = forceEff / masse;
             V_actuel = Math.min(V_actuel + acceleration * deltaTime, V_Max);
         } else {
             double forceFrottement = coef_frot * V_actuel;

@@ -12,12 +12,13 @@ public class Ecoute implements ActionListener,MouseListener{
     private Timer fTimer;
     private Timer physicsTimer;
     private long lastTime;
+    private Boite boite;
 
     public Ecoute(Tableau t) {
         this.t = t;
         this.voiture = t.getVoiture(); 
         this.lastTime = System.nanoTime();
-
+        this.boite=t.getBoite();
        
           // Timer pour la physique (60 fois/seconde)
         this.physicsTimer = new Timer(16, e -> {
@@ -57,7 +58,14 @@ public class Ecoute implements ActionListener,MouseListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-        
+        JButton button=(JButton) e.getSource();
+
+        if(button.getText().equals("+")){
+            boite.setRapport(Math.min(t.getBoite().getRapport()+1,boite.get_max()));
+        }else if(button.getText().equals("-")){
+            boite.setRapport(Math.max(0,t.getBoite().getRapport()-1));
+        }
+        t.update_Rapport();
     }
 
 }
